@@ -4,8 +4,9 @@
 	<meta charset="UTF-8">
 	<title><?=$title;?></title>
 	<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
-	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
 	<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-responsive.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
 	<script type="text/javascript" href="/assets/js/bootstrap.js"></script>
 	<script type="text/javascript" href="/assets/js/bootstrap.min.js"></script>
 	<script src="/assets/js/jquery.js"></script>

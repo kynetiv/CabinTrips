@@ -19,43 +19,49 @@ class Users extends Main{
 	}
 
 	public function show($id='')
-	{	$view_data['session_data'] = $this->user_session;
-		
-		$view_data['user_profile'] = $this->current_user_page($id);
-
-		$view_data['user_messages'] = $this->users_profile_model->get_messages($id);
-		
-
-		// $view_data['user_comments'] = $this->users_profile_model->get_comments($comment_message_id); 
-		// this is preventing me from loading comments Where comment_message_id = message_id in the view. 
-		//I need to do one query that gets comments and messages at the same time.
-
-		$message_form  = "<textarea id='message_area' class='span4 well-large' name='message_text'></textarea>";
-		$message_form .= "<input type='hidden' name='message_sender' value='" . $this->user_session['id'] . "'/>";
-		$message_form .= "<input type='hidden' name='message_receiver' value='" . $view_data['user_profile']['id'] . "'/>";
-		$message_form .= "<div class='controls'></div><button type='submit' class='btn btn-primary offset2'>Post to my wall!</button>";
-		$view_data['message_form'] = $message_form;
-
-		$view_data['title'] = "User Information";
-		$view_data['url_list'] = array("main", "dashboard", "users/show/" . $this->user_session['id'] . "");
-
-		if($this->user_session['user_level'] == 9)
+	{
+		if($this->user_session['login_status'] != TRUE)
 		{
-			$view_data['url_list'] = array("main", "dashboard/admin", "users/show/" . $this->user_session['id'] . "");
+			redirect(base_url('main'));
 		}
 		else
-		{
+		{	$view_data['session_data'] = $this->user_session;
+			
+			$view_data['user_profile'] = $this->current_user_page($id);
+
+			$view_data['user_messages'] = $this->users_profile_model->get_messages($id);
+			
+
+			// $view_data['user_comments'] = $this->users_profile_model->get_comments($comment_message_id); 
+			// this is preventing me from loading comments Where comment_message_id = message_id in the view. 
+			//I need to do one query that gets comments and messages at the same time.
+
+			$message_form  = "<textarea id='message_area' class='span4 well-large' name='message_text'></textarea>";
+			$message_form .= "<input type='hidden' name='message_sender' value='" . $this->user_session['id'] . "'/>";
+			$message_form .= "<input type='hidden' name='message_receiver' value='" . $view_data['user_profile']['id'] . "'/>";
+			$message_form .= "<div class='controls'></div><button type='submit' class='btn btn-primary offset2'>Post to my wall!</button>";
+			$view_data['message_form'] = $message_form;
+
+			$view_data['title'] = "User Information";
 			$view_data['url_list'] = array("main", "dashboard", "users/show/" . $this->user_session['id'] . "");
+
+			if($this->user_session['user_level'] == 9)
+			{
+				$view_data['url_list'] = array("main", "dashboard/admin", "users/show/" . $this->user_session['id'] . "");
+			}
+			else
+			{
+				$view_data['url_list'] = array("main", "dashboard", "users/show/" . $this->user_session['id'] . "");
+			}
+
+			$view_data['nav_list'] = array("Fink Cabin", "Dashboard", "Profile");
+			$view_data['in_or_out_url'] = array("logout");
+			$view_data['in_or_out_title'] = array("Logout");
+			$this->load->view('header', $view_data);
+			$this->load->view('users');
+
 		}
-
-		$view_data['nav_list'] = array("Fink Cabin", "Dashboard", "Profile");
-		$view_data['in_or_out_url'] = array("logout");
-		$view_data['in_or_out_title'] = array("Logout");
-		$this->load->view('header', $view_data);
-		$this->load->view('users');
-
 	}
-
 	public function process_message()
 	{
 		$message_text = $this->input->post('message_text');

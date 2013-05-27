@@ -52,8 +52,10 @@ $route['process_comment'] = "users/process_comment";
 $route['users/new'] = "users/new_user";
 $route['edit_user'] = "users/edit_user";
 $route['logout'] = "dashboard/logout";
+$route['calendar'] = "calendar/display";
 $route['404_override'] = '';
 $route['update_description'] = "users/update_description";
+
 
 
 

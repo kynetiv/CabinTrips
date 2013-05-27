@@ -17,7 +17,7 @@
 		<div class="control-group">
 			<label class="control-label" for="email"> Email </label>
 			<div class="controls">
-				<input type="text" name="email" />
+				<input type="text" name="email" autocomplete="off" />
 		<?php 				
 				echo form_error('email'); 
 		?>

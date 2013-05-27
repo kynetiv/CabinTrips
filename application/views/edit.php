@@ -54,14 +54,14 @@
 			<label class="control-label" for "user_level"> User Level: </label>
 			<div class="controls">
 				<select name="user_level">
-					<option value="<?php if($current_user['user_level'] == 'Admin') {echo '9';} else{echo '8';}?>"selected><?php if($current_user['user_level'] == '9') {echo 'Admin';} else{echo 'User';}?></option>
-					<?php if($current_user['user_level'] == 'Admin')
-					{
-						echo "<option value=8>User</option>";
+					<option value="<?php if($current_user['user_level'] == 9) {echo 9;} else{echo 8;}?>"><?php if($current_user['user_level'] == 9) {echo 'Admin';} else{echo 'User';}?></option>
+					<?php if($current_user['user_level'] == 9)
+					{	
+						echo "<option value='8'>User</option>";
 					}
 					else
 					{
-						echo "<option value=9>Admin</option>";
+						echo "<option value='9'>Admin</option>";
 					}
 					?>
 				</select>
